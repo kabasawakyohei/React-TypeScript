@@ -2,45 +2,37 @@ import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
+import {Todo} from "./Todo"
 
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+// TodoTypeは型になる
+type TodoType = {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+};
 
 function App(){
   //useStateに対して型を指定してあげる
-  const[todos, setTodos] = useState<any>{[]};
+  const[todos, setTodos] = useState<Array<TodoType>>([]);
 
   //コンポーネント関数
   const onClickFetchData = () => {
-    axios.get("https://jsonplaceholder.typicode.com/todos").then((res) => {
-      console.log(res);
+    axios.get<Array<TodoType>>("https://jsonplaceholder.typicode.com/todos").then((res) => {
+      setTodos(res.data)
     })
   }
 
   return (
     <div className="App">
       <button onClick={onClickFetchData}>データ取得処理</button>
+      {todos.map((todo: TodoType) => (
+        // 子コンポーネントであるTodoにtitleとuseridを渡している。かつTodoコンポーネントを表示している
+        // userId={todo.userId}の変数部分左辺を子コンポーネントに渡している
+        <Todo title={todo.title} userId={todo.userId} completed={todo.completed} />
+      ))}
     </div>
-  )
+  );
 }
 
 export default App;
