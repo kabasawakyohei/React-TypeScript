@@ -3,14 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import axios from "axios";
 import {Todo} from "./Todo"
-
-// TodoTypeは型になる
-type TodoType = {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-};
+import{TodoType} from "./types/todo"
+import{Text} from "./Text"
 
 function App(){
   //useStateに対して型を指定してあげる
@@ -25,11 +19,18 @@ function App(){
 
   return (
     <div className="App">
+      <Text 
+          
+      />
       <button onClick={onClickFetchData}>データ取得処理</button>
       {todos.map((todo: TodoType) => (
         // 子コンポーネントであるTodoにtitleとuseridを渡している。かつTodoコンポーネントを表示している
         // userId={todo.userId}の変数部分左辺を子コンポーネントに渡している
-        <Todo title={todo.title} userId={todo.userId} completed={todo.completed} />
+        <Todo
+          key={todo.id} 
+          title={todo.title} 
+          userId={todo.userId}
+          completed={todo.completed} />
       ))}
     </div>
   );
