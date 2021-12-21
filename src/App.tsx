@@ -20,8 +20,10 @@ function App(){
   return (
     <div className="App">
       <Text 
-          
-      />
+        color="red"
+        fontSize="12px" >
+          この要素がchildrenになる
+      </Text>         
       <button onClick={onClickFetchData}>データ取得処理</button>
       {todos.map((todo: TodoType) => (
         // 子コンポーネントであるTodoにtitleとuseridを渡している。かつTodoコンポーネントを表示している
