@@ -5,6 +5,8 @@ import axios from "axios";
 import {Todo} from "./Todo"
 import{TodoType} from "./types/todo"
 import{Text} from "./Text"
+import{UserProfile} from "./UserProfile"
+import{User} from "./types/user"
 
 function App(){
   //useStateに対して型を指定してあげる
@@ -16,9 +18,17 @@ function App(){
       setTodos(res.data)
     })
   }
+  const user: User = {
+    name: "かばさわ",
+    hobbies: ["サーフィン","卓球"],
+  }
 
   return (
     <div className="App">
+      <UserProfile
+        user={user}
+      />
+
       <Text 
         color="red"
         fontSize="12px" >
