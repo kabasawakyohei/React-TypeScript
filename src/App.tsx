@@ -7,6 +7,7 @@ import{TodoType} from "./types/todo"
 import{Text} from "./Text"
 import{UserProfile} from "./UserProfile"
 import{User} from "./types/user"
+import { UserCard } from './components/UserCard';
 
 function App(){
   //useStateに対して型を指定してあげる
@@ -18,13 +19,31 @@ function App(){
       setTodos(res.data)
     })
   }
+
+  const onClick = () => {
+
+  }
+  
   const user: User = {
     name: "かばさわ",
     hobbies: ["サーフィン","卓球"],
   }
 
+  const hoge = {
+    id:1,
+    name:"きょうへい",
+    email:"hoge@hoge.gmail.com",
+    address:"hoge"
+  }
+
   return (
     <div className="App">
+
+      <button onClick={onClick}>情報取得用ボタン</button>
+      <UserCard
+        hoge={hoge}
+      />
+
       <UserProfile
         user={user}
       />
